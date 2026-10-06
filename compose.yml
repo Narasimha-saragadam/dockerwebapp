@@ -1,7 +1,9 @@
 ---
+version: "3.9"
+
 services:
   devopsdb:
-    image: dbimage:latest
+    image: narasimhasaragadam/mylatestdockerrepo:db
     ports:
       - "3306:3306"
     deploy:
@@ -10,11 +12,11 @@ services:
       - mynetwork
 
   application:
-    image: appimage:latest
+    image: narasimhasaragadam/mylatestdockerrepo:java
     ports:
       - "1111:8080"
     deploy:
-      replicas: 1
+      replicas: 3
     depends_on:
       - devopsdb
     networks:
@@ -22,4 +24,4 @@ services:
 
 networks:
   mynetwork:
-    driver: bridge
+    driver: overlay
